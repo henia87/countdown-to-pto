@@ -21,7 +21,7 @@ export class CountdownComponent implements OnInit {
     "Management can't take this back now! 📝",
     'Tickets can wait... 📊',
     'Your OOO message is ready to deploy! 📧',
-    'Slack status: 🌴 (soon!)',
+    'Slack status: 🎄🎅 (soon!)',
     'Breaking: Local dev counting down to PTO 📰',
     'Coffee consumption: MAXIMUM ☕',
     "Productivity graph: 📉 (it's fine!)",
