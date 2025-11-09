@@ -1,0 +1,103 @@
+/* You can add global styles to this file, and also import other style files */
+
+// Christmas Color Palette
+$christmas-red: #c41e3a;
+$christmas-green: #165b33;
+$gold: #ffd700;
+$snow-white: #ffffff;
+$dark-night: #0f1c2e;
+
+// Global Reset and Base Styles
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html,
+body {
+  height: 100%;
+  width: 100%;
+}
+
+body {
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+  color: #333;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow-x: hidden;
+
+  // Animated snowflakes background (optional)
+  &::before {
+    content: "❄️";
+    position: fixed;
+    top: -10%;
+    left: 0;
+    width: 100%;
+    height: 120%;
+    font-size: 2rem;
+    opacity: 0.1;
+    pointer-events: none;
+    z-index: -1;
+    animation: snowfall 20s linear infinite;
+  }
+}
+
+@keyframes snowfall {
+  0% {
+    transform: translateY(-100%);
+  }
+  100% {
+    transform: translateY(100%);
+  }
+}
+
+// Typography
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+p {
+  line-height: 1.6;
+}
+
+// Utility Classes
+.text-center {
+  text-align: center;
+}
+
+.text-christmas-red {
+  color: $christmas-red;
+}
+
+.text-christmas-green {
+  color: $christmas-green;
+}
+
+.text-gold {
+  color: $gold;
+}
+
+// Responsive Container
+.container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+// App-specific styles
+app-root {
+  width: 100%;
+  display: block;
+}

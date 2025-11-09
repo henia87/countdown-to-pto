@@ -1,0 +1,70 @@
+<div class="countdown-container">
+  @if (!countdownComplete()) {
+  <!-- Main Countdown Display -->
+  <div class="countdown-header">
+    <h1 class="title">🎄 Christmas Leave Countdown 🎄</h1>
+    <p class="subtitle">Freedom approaches... December 19, 2025 at 6:00 PM</p>
+  </div>
+
+  <!-- Time Units Display -->
+  <div class="time-units">
+    <!-- Weeks -->
+    <div class="time-unit">
+      <div class="time-value">{{ formatNumber(remainingTime().weeks) }}</div>
+      <div class="time-label">WEEKS</div>
+    </div>
+
+    <!-- Days -->
+    <div class="time-unit">
+      <div class="time-value">{{ formatNumber(remainingTime().days) }}</div>
+      <div class="time-label">DAYS</div>
+    </div>
+
+    <!-- Hours -->
+    <div class="time-unit">
+      <div class="time-value">{{ formatNumber(remainingTime().hours) }}</div>
+      <div class="time-label">HOURS</div>
+    </div>
+
+    <!-- Minutes -->
+    <div class="time-unit">
+      <div class="time-value">{{ formatNumber(remainingTime().minutes) }}</div>
+      <div class="time-label">MINUTES</div>
+    </div>
+
+    <!-- Seconds -->
+    <div class="time-unit">
+      <div class="time-value">{{ formatNumber(remainingTime().seconds) }}</div>
+      <div class="time-label">SECONDS</div>
+    </div>
+  </div>
+
+  <!-- Progress Bar -->
+  <div class="progress-section">
+    <div class="progress-bar">
+      <div class="progress-fill" [style.width.%]="progress()"></div>
+    </div>
+    <div class="progress-text">{{ progress() }}% Complete</div>
+  </div>
+
+  <!-- Fun Statistics -->
+  <div class="stats">
+    <p class="stat-item">
+      📊 Total Days Until Freedom: {{ remainingTime().totalDays }}
+    </p>
+    <p class="stat-item">
+      ⏰ Total Hours: {{ remainingTime().totalHours.toLocaleString() }}
+    </p>
+    <p class="stat-item">
+      ☕ Coffee Breaks Remaining: {{ remainingTime().totalDays * 3 }}
+    </p>
+  </div>
+  } @else {
+  <!-- Celebration Message -->
+  <div class="celebration">
+    <h1 class="celebration-title">🎉 YOU'RE FREE! 🎉</h1>
+    <p class="celebration-message">Christmas leave has STARTED! 🎄✨</p>
+    <p class="celebration-subtitle">Merry Christmasing! Time to relax! 🎅</p>
+  </div>
+  }
+</div>

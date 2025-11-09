@@ -1,0 +1,202 @@
+.countdown-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem;
+  text-align: center;
+}
+
+.countdown-header {
+  margin-bottom: 3rem;
+
+  .title {
+    font-size: 3rem;
+    font-weight: bold;
+    color: #c41e3a; // Christmas Red
+    margin-bottom: 1rem;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+
+    @media (max-width: 768px) {
+      font-size: 2rem;
+    }
+  }
+
+  .subtitle {
+    font-size: 1.2rem;
+    color: #165b33; // Christmas Green
+    font-weight: 500;
+
+    @media (max-width: 768px) {
+      font-size: 1rem;
+    }
+  }
+}
+
+.time-units {
+  display: flex;
+  justify-content: center;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+  margin-bottom: 3rem;
+}
+
+.time-unit {
+  background: linear-gradient(135deg, #c41e3a 0%, #a01729 100%);
+  border-radius: 16px;
+  padding: 2rem 1.5rem;
+  min-width: 120px;
+  box-shadow: 0 8px 16px rgba(196, 30, 58, 0.3);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+
+  &:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 24px rgba(196, 30, 58, 0.4);
+  }
+
+  @media (max-width: 768px) {
+    min-width: 80px;
+    padding: 1.5rem 1rem;
+  }
+
+  .time-value {
+    font-size: 3.5rem;
+    font-weight: bold;
+    color: #ffffff;
+    line-height: 1;
+    margin-bottom: 0.5rem;
+    font-family: "Courier New", monospace;
+
+    @media (max-width: 768px) {
+      font-size: 2.5rem;
+    }
+  }
+
+  .time-label {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: #ffd700; // Gold
+    letter-spacing: 2px;
+
+    @media (max-width: 768px) {
+      font-size: 0.7rem;
+      letter-spacing: 1px;
+    }
+  }
+}
+
+.progress-section {
+  margin-bottom: 2rem;
+
+  .progress-bar {
+    width: 100%;
+    height: 30px;
+    background-color: #f0f0f0;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1);
+    margin-bottom: 0.5rem;
+  }
+
+  .progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #165b33 0%, #1e8449 50%, #ffd700 100%);
+    transition: width 1s ease;
+    border-radius: 15px;
+    position: relative;
+
+    &::after {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: linear-gradient(
+        90deg,
+        transparent 0%,
+        rgba(255, 255, 255, 0.3) 50%,
+        transparent 100%
+      );
+      animation: shimmer 2s infinite;
+    }
+  }
+
+  .progress-text {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #165b33;
+  }
+}
+
+@keyframes shimmer {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+.stats {
+  background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+  border-radius: 12px;
+  padding: 1.5rem;
+  margin-top: 2rem;
+
+  .stat-item {
+    font-size: 1.1rem;
+    margin: 0.5rem 0;
+    color: #333;
+    font-weight: 500;
+
+    @media (max-width: 768px) {
+      font-size: 0.9rem;
+    }
+  }
+}
+
+// Celebration Styles
+.celebration {
+  padding: 4rem 2rem;
+
+  .celebration-title {
+    font-size: 4rem;
+    font-weight: bold;
+    color: #c41e3a;
+    margin-bottom: 1rem;
+    animation: bounce 1s infinite;
+
+    @media (max-width: 768px) {
+      font-size: 2.5rem;
+    }
+  }
+
+  .celebration-message {
+    font-size: 2rem;
+    color: #165b33;
+    margin-bottom: 1rem;
+
+    @media (max-width: 768px) {
+      font-size: 1.5rem;
+    }
+  }
+
+  .celebration-subtitle {
+    font-size: 1.5rem;
+    color: #ffd700;
+    font-weight: 600;
+
+    @media (max-width: 768px) {
+      font-size: 1.2rem;
+    }
+  }
+}
+
+@keyframes bounce {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-20px);
+  }
+}
