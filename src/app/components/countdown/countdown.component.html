@@ -5,6 +5,7 @@
     <h1 class="title">🎄 Christmas Leave Countdown 🎄</h1>
     <p class="subtitle">Freedom approaches... December 19, 2025 at 6:00 PM</p>
     <p class="milestone-message">{{ getMilestoneMessage() }}</p>
+    <p class="funny-quote">{{ currentFunnyQuote }}</p>
   </div>
 
   <!-- Time Units Display -->
@@ -57,7 +58,10 @@
       ⏰ Total Hours: {{ remainingTime().totalHours.toLocaleString() }}
     </p>
     <p class="stat-item">
-      ☕ Coffee Breaks Remaining: {{ remainingTime().totalDays * 3 }}
+      💼 Workdays Left: {{ getWorkdaysRemaining() }}
+    </p>
+    <p class="stat-item">
+      ⏱️ Work Hours Left: {{ getWorkHoursRemaining().toLocaleString() }}
     </p>
   </div>
   } @else {

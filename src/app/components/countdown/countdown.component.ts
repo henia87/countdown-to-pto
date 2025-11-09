@@ -11,6 +11,26 @@ import { effect } from '@angular/core';
 })
 export class CountdownComponent implements OnInit {
   private confettiLaunched = false;
+  currentFunnyQuote: string = '';
+
+  // Array of rotating funny work-themed quotes
+  private funnyQuotes = [
+    'Still here? Unfortunate... 😅',
+    'The elves are preparing your vacation! 🧝',
+    "Santa's checking your commit history 🎅",
+    "Management can't take this back now! 📝",
+    'Tickets can wait... 📊',
+    'Your OOO message is ready to deploy! 📧',
+    'Slack status: 🌴 (soon!)',
+    'Breaking: Local dev counting down to PTO 📰',
+    'Coffee consumption: MAXIMUM ☕',
+    "Productivity graph: 📉 (it's fine!)",
+    'Days until you ignore emails: [countdown] 📬',
+    'Christmas is coming... AND SO IS YOUR VACATION! 🎄',
+    'Meetings? Not your problem soon! 🚫',
+    'The standup can happen without you! 🎤',
+    'Your laptop will miss you... probably 💻',
+  ];
 
   constructor(private countdownService: CountdownService) {
     // Watch for countdown completion and trigger confetti
@@ -38,6 +58,46 @@ export class CountdownComponent implements OnInit {
   ngOnInit(): void {
     // Increment the check counter for fun statistics
     this.countdownService.incrementCheckCount();
+
+    // Set a random funny quote on page load
+    this.setRandomQuote();
+
+    // Change quote every 10 seconds
+    setInterval(() => {
+      this.setRandomQuote();
+    }, 10000);
+  }
+
+  // Select a random funny quote
+  private setRandomQuote(): void {
+    const randomIndex = Math.floor(Math.random() * this.funnyQuotes.length);
+    this.currentFunnyQuote = this.funnyQuotes[randomIndex];
+  }
+
+  // Calculate remaining workdays (Mon-Fri only)
+  getWorkdaysRemaining(): number {
+    const now = new Date();
+    const targetDate = new Date('2025-12-19T18:00:00+01:00');
+
+    let workdays = 0;
+    const currentDate = new Date(now);
+
+    // Loop through each day until target
+    while (currentDate < targetDate) {
+      const dayOfWeek = currentDate.getDay();
+      // 1 = Monday, 5 = Friday (0 = Sunday, 6 = Saturday)
+      if (dayOfWeek >= 1 && dayOfWeek <= 5) {
+        workdays++;
+      }
+      currentDate.setDate(currentDate.getDate() + 1);
+    }
+
+    return workdays;
+  }
+
+  // Calculate remaining work hours (8 hours per workday)
+  getWorkHoursRemaining(): number {
+    return this.getWorkdaysRemaining() * 8;
   }
 
   // Helper method to format numbers with leading zeros

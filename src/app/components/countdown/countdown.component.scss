@@ -47,6 +47,20 @@
       padding: 0.8rem 1.5rem;
     }
   }
+
+  .funny-quote {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #c41e3a; // Christmas Red
+    margin-top: 1rem;
+    font-style: italic;
+    opacity: 0.9;
+    transition: opacity 0.5s ease;
+
+    @media (max-width: 768px) {
+      font-size: 0.95rem;
+    }
+  }
 }
 
 .time-units {
