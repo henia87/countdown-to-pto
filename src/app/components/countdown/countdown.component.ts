@@ -21,7 +21,7 @@ export class CountdownComponent implements OnInit {
     "Management can't take this back now! 📝",
     'Tickets can wait... 📊',
     'Your OOO message is ready to deploy! 📧',
-    'Slack status: 🎄🎅 (soon!)',
+    'Teams status: 🎄🎅 (soon!)',
     'Breaking: Local dev counting down to PTO 📰',
     'Coffee consumption: MAXIMUM ☕',
     "Productivity graph: 📉 (it's fine!)",
@@ -66,6 +66,53 @@ export class CountdownComponent implements OnInit {
     setInterval(() => {
       this.setRandomQuote();
     }, 10000);
+
+    // Create realistic snowflakes
+    this.createSnowflakes();
+  }
+
+  // Create individual random snowflakes
+  private createSnowflakes(): void {
+    const numberOfSnowflakes = 30;
+
+    // Stagger initial snowflake creation
+    for (let i = 0; i < numberOfSnowflakes; i++) {
+      setTimeout(() => {
+        this.createSnowflake();
+      }, i * 300);
+    }
+
+    // Continuously create new snowflakes to maintain density
+    setInterval(() => {
+      this.createSnowflake();
+    }, 600);
+  }
+
+  // Create a single snowflake with random properties
+  private createSnowflake(): void {
+    const snowflake = document.createElement('div');
+    snowflake.classList.add('snowflake');
+    snowflake.textContent = '❄';
+
+    // Random properties for natural variation
+    const leftPosition = Math.random() * 100; // Random horizontal position
+    const fontSize = Math.random() * 0.8 + 0.6; // 0.6rem to 1.4rem
+    const duration = Math.random() * 10 + 10; // 10s to 20s fall time
+    const delay = Math.random() * 2; // 0s to 2s delay
+    const drift = Math.random() * 60 - 30; // -30px to 30px horizontal drift
+
+    snowflake.style.left = `${leftPosition}%`;
+    snowflake.style.fontSize = `${fontSize}rem`;
+    snowflake.style.animationDuration = `${duration}s`;
+    snowflake.style.animationDelay = `${delay}s`;
+    snowflake.style.setProperty('--drift', `${drift}px`);
+
+    document.body.appendChild(snowflake);
+
+    // Clean up snowflake after animation completes
+    setTimeout(() => {
+      snowflake.remove();
+    }, (duration + delay) * 1000);
   }
 
   // Select a random funny quote
