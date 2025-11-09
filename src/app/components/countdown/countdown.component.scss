@@ -29,6 +29,24 @@
       font-size: 1rem;
     }
   }
+
+  .milestone-message {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #ffd700; // Gold
+    margin-top: 1rem;
+    padding: 1rem 2rem;
+    background: linear-gradient(135deg, #165b33 0%, #1e8449 100%);
+    border-radius: 12px;
+    display: inline-block;
+    box-shadow: 0 4px 12px rgba(22, 91, 51, 0.3);
+    animation: pulse 2s infinite;
+
+    @media (max-width: 768px) {
+      font-size: 1.1rem;
+      padding: 0.8rem 1.5rem;
+    }
+  }
 }
 
 .time-units {
@@ -198,5 +216,17 @@
   }
   50% {
     transform: translateY(-20px);
+  }
+}
+
+@keyframes pulse {
+  0%,
+  100% {
+    transform: scale(1);
+    box-shadow: 0 4px 12px rgba(22, 91, 51, 0.3);
+  }
+  50% {
+    transform: scale(1.05);
+    box-shadow: 0 6px 16px rgba(255, 215, 0, 0.5);
   }
 }
