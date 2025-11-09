@@ -81,9 +81,11 @@ export class CountdownComponent implements OnInit {
 
     let workdays = 0;
     const currentDate = new Date(now);
+    // Set time to start of day for accurate day counting
+    currentDate.setHours(0, 0, 0, 0);
 
-    // Loop through each day until target
-    while (currentDate < targetDate) {
+    // Loop through each day until target (including Dec 19 since you work until 6PM)
+    while (currentDate <= targetDate) {
       const dayOfWeek = currentDate.getDay();
       // 1 = Monday, 5 = Friday (0 = Sunday, 6 = Saturday)
       if (dayOfWeek >= 1 && dayOfWeek <= 5) {
