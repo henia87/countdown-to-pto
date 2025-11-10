@@ -13,6 +13,10 @@ export class CountdownComponent implements OnInit {
   private confettiLaunched = false;
   currentFunnyQuote: string = '';
   workingDecember13th: boolean = false; // Toggle for extra workday
+  trackingTraitor: boolean = false; // Toggle for Dec 12th early leaver
+
+  // Traitor's escape date
+  private readonly TRAITOR_ESCAPE = new Date('2025-12-12T18:00:00+01:00');
 
   // Array of rotating funny work-themed quotes
   private funnyQuotes = [
@@ -161,6 +165,53 @@ export class CountdownComponent implements OnInit {
     }
 
     return Math.max(0, baseHours);
+  });
+
+  // Traitor tracking - is the traitor still here or already free?
+  isTraitorFree = computed(() => {
+    const _ = this.remainingTime(); // Make reactive
+    const now = new Date();
+    return now >= this.TRAITOR_ESCAPE;
+  });
+
+  // Workdays until traitor escapes (before Dec 12)
+  workdaysUntilTraitorEscape = computed(() => {
+    const _ = this.remainingTime(); // Make reactive
+    const now = new Date();
+    const targetDate = this.TRAITOR_ESCAPE;
+    const currentHour = now.getHours();
+
+    let workdays = 0;
+    const currentDate = new Date(now);
+    currentDate.setHours(0, 0, 0, 0);
+
+    // If it's past 6 PM on a weekday, don't count today
+    if (currentHour >= 18 && now.getDay() >= 1 && now.getDay() <= 5) {
+      currentDate.setDate(currentDate.getDate() + 1);
+    }
+
+    while (currentDate <= targetDate) {
+      const dayOfWeek = currentDate.getDay();
+      if (dayOfWeek >= 1 && dayOfWeek <= 5) {
+        workdays++;
+      }
+      currentDate.setDate(currentDate.getDate() + 1);
+    }
+
+    return workdays;
+  });
+
+  // Days traitor has been free (after Dec 12)
+  daysTraitorHasBeenFree = computed(() => {
+    const _ = this.remainingTime(); // Make reactive
+    const now = new Date();
+    const diff = now.getTime() - this.TRAITOR_ESCAPE.getTime();
+    return Math.max(0, Math.floor(diff / (1000 * 60 * 60 * 24)));
+  });
+
+  // Estimate emails answered while traitor relaxes (rough estimate: 20/day)
+  emailsWhileTraitorRelaxes = computed(() => {
+    return this.daysTraitorHasBeenFree() * 20;
   });
 
   ngOnInit(): void {

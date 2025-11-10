@@ -22,6 +22,23 @@
       </label>
     </div>
 
+    <!-- Traitor Tracking Toggle -->
+    <div class="december-13th-toggle">
+      <label class="toggle-label">
+        <span class="toggle-text"
+          >🎮 There's a traitor among us (leaves Dec 12)... Dare to see?</span
+        >
+        <div class="toggle-switch">
+          <input
+            type="checkbox"
+            [(ngModel)]="trackingTraitor"
+            id="traitor-toggle"
+          />
+          <span class="slider"></span>
+        </div>
+      </label>
+    </div>
+
     <p class="milestone-message">{{ getMilestoneMessage() }}</p>
     <p class="funny-quote">{{ currentFunnyQuote }}</p>
   </div>
@@ -90,7 +107,34 @@
       ⏱️ Work Hours Left: {{ workHoursRemaining().toLocaleString() }}
     </p>
   </div>
-  } @else {
+
+  <!-- Traitor Tracking Stats (when toggled) -->
+  @if (trackingTraitor) {
+  <div class="traitor-stats">
+    <h3 class="traitor-title">🎮 Traitor Tracking Status</h3>
+    @if (!isTraitorFree()) {
+    <!-- Before Dec 12 -->
+    <p class="stat-item">
+      🏖️ Workdays until the traitor's escape: {{ workdaysUntilTraitorEscape() }}
+    </p>
+    <p class="stat-item">⏰ Hours of freedom they'll have before you: 168</p>
+    } @else {
+    <!-- After Dec 12 -->
+    <p class="stat-item">
+      😎 Days the traitor has been free: {{ daysTraitorHasBeenFree() }}
+    </p>
+    <p class="stat-item">
+      📧 Emails you've answered while they relax:
+      {{
+        emailsWhileTraitorRelaxes() > 0
+          ? emailsWhileTraitorRelaxes().toLocaleString()
+          : "Too many"
+      }}
+    </p>
+    <p class="stat-item">☕ Your jealousy level: MAXIMUM</p>
+    }
+  </div>
+  } } @else {
   <!-- Celebration Message -->
   <div class="celebration">
     <h1 class="celebration-title">🎉 YOU'RE FREE! 🎉</h1>

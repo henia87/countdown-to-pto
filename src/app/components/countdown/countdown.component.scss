@@ -261,6 +261,39 @@
   }
 }
 
+// Traitor Tracking Stats
+.traitor-stats {
+  background: linear-gradient(135deg, #fff4e6 0%, #ffe0b2 100%);
+  border: 2px solid #ff9800;
+  border-radius: 12px;
+  padding: 1.5rem;
+  margin-top: 1.5rem;
+  box-shadow: 0 4px 12px rgba(255, 152, 0, 0.2);
+
+  .traitor-title {
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: #e65100;
+    margin-bottom: 1rem;
+    text-align: center;
+
+    @media (max-width: 768px) {
+      font-size: 1.1rem;
+    }
+  }
+
+  .stat-item {
+    font-size: 1.1rem;
+    margin: 0.5rem 0;
+    color: #333;
+    font-weight: 500;
+
+    @media (max-width: 768px) {
+      font-size: 0.9rem;
+    }
+  }
+}
+
 // Celebration Styles
 .celebration {
   padding: 4rem 2rem;
