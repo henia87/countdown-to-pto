@@ -97,14 +97,23 @@ export class CountdownComponent implements OnInit {
 
     // If we're currently in a workday, subtract hours already worked today
     if (dayOfWeek >= 1 && dayOfWeek <= 5) {
-      if (currentHour >= 9 && currentHour < 18) {
-        // We're in working hours, subtract completed hours
-        const hoursWorkedToday = currentHour - 9;
-        baseHours -= hoursWorkedToday;
+      let hoursWorkedToday = 0;
+
+      if (currentHour >= 9 && currentHour < 12) {
+        // 9 AM - 12 PM: 3 hours max
+        hoursWorkedToday = currentHour - 9;
+      } else if (currentHour >= 12 && currentHour < 13) {
+        // 12 PM - 1 PM: Lunch break, still 3 hours worked
+        hoursWorkedToday = 3;
+      } else if (currentHour >= 13 && currentHour < 18) {
+        // 1 PM - 6 PM: 3 hours from morning + hours after lunch
+        hoursWorkedToday = 3 + (currentHour - 13);
       } else if (currentHour >= 18) {
-        // Past working hours, subtract full day
-        baseHours -= 8;
+        // Past 6 PM: Full 8 hours worked
+        hoursWorkedToday = 8;
       }
+
+      baseHours -= hoursWorkedToday;
     }
 
     return Math.max(0, baseHours);
@@ -198,7 +207,7 @@ export class CountdownComponent implements OnInit {
     } else if (progressValue >= 10) {
       return 'Final stretch! 🏃';
     } else {
-      return 'Still here? Unfortunate... 😅';
+      return 'Hang in there! 💪✨';
     }
   }
 
