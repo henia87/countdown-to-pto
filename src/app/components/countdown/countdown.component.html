@@ -86,7 +86,15 @@
     </div>
   </div>
 
-  <!-- Traitor Tracking Stats (when toggled) - MOVED HERE FOR MAXIMUM IMPACT -->
+  <!-- Progress Bar -->
+  <div class="progress-section">
+    <div class="progress-bar">
+      <div class="progress-fill" [style.width.%]="progress()"></div>
+    </div>
+    <div class="progress-text">{{ progress() }}% Complete</div>
+  </div>
+
+  <!-- Traitor Tracking Stats (when toggled) - Under progress bar with spacing -->
   @if (trackingTraitor) {
   <div class="traitor-stats">
     <h3 class="traitor-title">🎮 Traitor Tracking Status</h3>
@@ -113,14 +121,6 @@
     }
   </div>
   }
-
-  <!-- Progress Bar -->
-  <div class="progress-section">
-    <div class="progress-bar">
-      <div class="progress-fill" [style.width.%]="progress()"></div>
-    </div>
-    <div class="progress-text">{{ progress() }}% Complete</div>
-  </div>
 
   <!-- Fun Statistics -->
   <div class="stats">
