@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, computed } from '@angular/core';
 import { CountdownService } from '../../services/countdown.service';
 import confetti from 'canvas-confetti';
 import { effect } from '@angular/core';
@@ -54,6 +54,61 @@ export class CountdownComponent implements OnInit {
   get countdownComplete() {
     return this.countdownService.countdownComplete;
   }
+
+  // Computed signal for workdays remaining (updates in real-time)
+  workdaysRemaining = computed(() => {
+    // Access remainingTime to make this reactive
+    const _ = this.remainingTime();
+
+    const now = new Date();
+    const targetDate = new Date('2025-12-19T18:00:00+01:00');
+    const currentHour = now.getHours();
+
+    let workdays = 0;
+    const currentDate = new Date(now);
+    currentDate.setHours(0, 0, 0, 0);
+
+    // If it's past 6 PM on a weekday, don't count today
+    if (currentHour >= 18 && now.getDay() >= 1 && now.getDay() <= 5) {
+      currentDate.setDate(currentDate.getDate() + 1);
+    }
+
+    while (currentDate <= targetDate) {
+      const dayOfWeek = currentDate.getDay();
+      if (dayOfWeek >= 1 && dayOfWeek <= 5) {
+        workdays++;
+      }
+      currentDate.setDate(currentDate.getDate() + 1);
+    }
+
+    return workdays;
+  });
+
+  // Computed signal for work hours remaining (updates in real-time)
+  workHoursRemaining = computed(() => {
+    // Access remainingTime to make this reactive
+    const _ = this.remainingTime();
+
+    const now = new Date();
+    const currentHour = now.getHours();
+    const dayOfWeek = now.getDay();
+
+    let baseHours = this.workdaysRemaining() * 8;
+
+    // If we're currently in a workday, subtract hours already worked today
+    if (dayOfWeek >= 1 && dayOfWeek <= 5) {
+      if (currentHour >= 9 && currentHour < 18) {
+        // We're in working hours, subtract completed hours
+        const hoursWorkedToday = currentHour - 9;
+        baseHours -= hoursWorkedToday;
+      } else if (currentHour >= 18) {
+        // Past working hours, subtract full day
+        baseHours -= 8;
+      }
+    }
+
+    return Math.max(0, baseHours);
+  });
 
   ngOnInit(): void {
     // Increment the check counter for fun statistics
@@ -119,34 +174,6 @@ export class CountdownComponent implements OnInit {
   private setRandomQuote(): void {
     const randomIndex = Math.floor(Math.random() * this.funnyQuotes.length);
     this.currentFunnyQuote = this.funnyQuotes[randomIndex];
-  }
-
-  // Calculate remaining workdays (Mon-Fri only)
-  getWorkdaysRemaining(): number {
-    const now = new Date();
-    const targetDate = new Date('2025-12-19T18:00:00+01:00');
-
-    let workdays = 0;
-    const currentDate = new Date(now);
-    // Set time to start of day for accurate day counting
-    currentDate.setHours(0, 0, 0, 0);
-
-    // Loop through each day until target (including Dec 19 since you work until 6PM)
-    while (currentDate <= targetDate) {
-      const dayOfWeek = currentDate.getDay();
-      // 1 = Monday, 5 = Friday (0 = Sunday, 6 = Saturday)
-      if (dayOfWeek >= 1 && dayOfWeek <= 5) {
-        workdays++;
-      }
-      currentDate.setDate(currentDate.getDate() + 1);
-    }
-
-    return workdays;
-  }
-
-  // Calculate remaining work hours (8 hours per workday)
-  getWorkHoursRemaining(): number {
-    return this.getWorkdaysRemaining() * 8;
   }
 
   // Helper method to format numbers with leading zeros

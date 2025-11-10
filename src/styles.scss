@@ -25,11 +25,14 @@ body {
   background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
   color: #333;
   min-height: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
   position: relative;
-  overflow: hidden;
+  overflow-x: hidden;
+  overflow-y: auto;
+  padding: 2rem 0;
+
+  @media (max-width: 768px) {
+    padding: 1rem 0;
+  }
 }
 
 // Container for snowflakes (will be populated by JavaScript)
@@ -105,4 +108,5 @@ p {
 app-root {
   width: 100%;
   display: block;
+  min-height: 100vh;
 }

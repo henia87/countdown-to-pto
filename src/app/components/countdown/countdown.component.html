@@ -57,11 +57,9 @@
     <p class="stat-item">
       ⏰ Total Hours: {{ remainingTime().totalHours.toLocaleString() }}
     </p>
+    <p class="stat-item">💼 Workdays Left: {{ workdaysRemaining() }}</p>
     <p class="stat-item">
-      💼 Workdays Left: {{ getWorkdaysRemaining() }}
-    </p>
-    <p class="stat-item">
-      ⏱️ Work Hours Left: {{ getWorkHoursRemaining().toLocaleString() }}
+      ⏱️ Work Hours Left: {{ workHoursRemaining().toLocaleString() }}
     </p>
   </div>
   } @else {
