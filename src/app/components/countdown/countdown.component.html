@@ -86,29 +86,7 @@
     </div>
   </div>
 
-  <!-- Progress Bar -->
-  <div class="progress-section">
-    <div class="progress-bar">
-      <div class="progress-fill" [style.width.%]="progress()"></div>
-    </div>
-    <div class="progress-text">{{ progress() }}% Complete</div>
-  </div>
-
-  <!-- Fun Statistics -->
-  <div class="stats">
-    <p class="stat-item">
-      📊 Total Days Until Freedom: {{ adjustedRemainingTime().totalDays }}
-    </p>
-    <p class="stat-item">
-      ⏰ Total Hours: {{ adjustedRemainingTime().totalHours.toLocaleString() }}
-    </p>
-    <p class="stat-item">💼 Workdays Left: {{ workdaysRemaining() }}</p>
-    <p class="stat-item">
-      ⏱️ Work Hours Left: {{ workHoursRemaining().toLocaleString() }}
-    </p>
-  </div>
-
-  <!-- Traitor Tracking Stats (when toggled) -->
+  <!-- Traitor Tracking Stats (when toggled) - MOVED HERE FOR MAXIMUM IMPACT -->
   @if (trackingTraitor) {
   <div class="traitor-stats">
     <h3 class="traitor-title">🎮 Traitor Tracking Status</h3>
@@ -134,7 +112,30 @@
     <p class="stat-item">☕ Your jealousy level: MAXIMUM</p>
     }
   </div>
-  } } @else {
+  }
+
+  <!-- Progress Bar -->
+  <div class="progress-section">
+    <div class="progress-bar">
+      <div class="progress-fill" [style.width.%]="progress()"></div>
+    </div>
+    <div class="progress-text">{{ progress() }}% Complete</div>
+  </div>
+
+  <!-- Fun Statistics -->
+  <div class="stats">
+    <p class="stat-item">
+      📊 Total Days Until Freedom: {{ adjustedRemainingTime().totalDays }}
+    </p>
+    <p class="stat-item">
+      ⏰ Total Hours: {{ adjustedRemainingTime().totalHours.toLocaleString() }}
+    </p>
+    <p class="stat-item">💼 Workdays Left: {{ workdaysRemaining() }}</p>
+    <p class="stat-item">
+      ⏱️ Work Hours Left: {{ workHoursRemaining().toLocaleString() }}
+    </p>
+  </div>
+  } @else {
   <!-- Celebration Message -->
   <div class="celebration">
     <h1 class="celebration-title">🎉 YOU'RE FREE! 🎉</h1>
