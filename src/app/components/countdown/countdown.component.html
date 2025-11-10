@@ -4,6 +4,24 @@
   <div class="countdown-header">
     <h1 class="title">🎄 Christmas Leave Countdown 🎄</h1>
     <p class="subtitle">Freedom approaches... December 19, 2025 at 6:00 PM</p>
+
+    <!-- December 13th Toggle -->
+    <div class="december-13th-toggle">
+      <label class="toggle-label">
+        <span class="toggle-text"
+          >⚠️ Working December 13th (Saturday)? You poor soul... 😭</span
+        >
+        <div class="toggle-switch">
+          <input
+            type="checkbox"
+            [(ngModel)]="workingDecember13th"
+            id="dec13-toggle"
+          />
+          <span class="slider"></span>
+        </div>
+      </label>
+    </div>
+
     <p class="milestone-message">{{ getMilestoneMessage() }}</p>
     <p class="funny-quote">{{ currentFunnyQuote }}</p>
   </div>
@@ -12,31 +30,41 @@
   <div class="time-units">
     <!-- Weeks -->
     <div class="time-unit">
-      <div class="time-value">{{ formatNumber(remainingTime().weeks) }}</div>
+      <div class="time-value">
+        {{ formatNumber(adjustedRemainingTime().weeks) }}
+      </div>
       <div class="time-label">WEEKS</div>
     </div>
 
     <!-- Days -->
     <div class="time-unit">
-      <div class="time-value">{{ formatNumber(remainingTime().days) }}</div>
+      <div class="time-value">
+        {{ formatNumber(adjustedRemainingTime().days) }}
+      </div>
       <div class="time-label">DAYS</div>
     </div>
 
     <!-- Hours -->
     <div class="time-unit">
-      <div class="time-value">{{ formatNumber(remainingTime().hours) }}</div>
+      <div class="time-value">
+        {{ formatNumber(adjustedRemainingTime().hours) }}
+      </div>
       <div class="time-label">HOURS</div>
     </div>
 
     <!-- Minutes -->
     <div class="time-unit">
-      <div class="time-value">{{ formatNumber(remainingTime().minutes) }}</div>
+      <div class="time-value">
+        {{ formatNumber(adjustedRemainingTime().minutes) }}
+      </div>
       <div class="time-label">MINUTES</div>
     </div>
 
     <!-- Seconds -->
     <div class="time-unit">
-      <div class="time-value">{{ formatNumber(remainingTime().seconds) }}</div>
+      <div class="time-value">
+        {{ formatNumber(adjustedRemainingTime().seconds) }}
+      </div>
       <div class="time-label">SECONDS</div>
     </div>
   </div>
@@ -52,10 +80,10 @@
   <!-- Fun Statistics -->
   <div class="stats">
     <p class="stat-item">
-      📊 Total Days Until Freedom: {{ remainingTime().totalDays }}
+      📊 Total Days Until Freedom: {{ adjustedRemainingTime().totalDays }}
     </p>
     <p class="stat-item">
-      ⏰ Total Hours: {{ remainingTime().totalHours.toLocaleString() }}
+      ⏰ Total Hours: {{ adjustedRemainingTime().totalHours.toLocaleString() }}
     </p>
     <p class="stat-item">💼 Workdays Left: {{ workdaysRemaining() }}</p>
     <p class="stat-item">

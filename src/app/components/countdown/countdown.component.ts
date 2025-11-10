@@ -12,6 +12,7 @@ import { effect } from '@angular/core';
 export class CountdownComponent implements OnInit {
   private confettiLaunched = false;
   currentFunnyQuote: string = '';
+  workingDecember13th: boolean = false; // Toggle for extra workday
 
   // Array of rotating funny work-themed quotes
   private funnyQuotes = [
@@ -47,6 +48,44 @@ export class CountdownComponent implements OnInit {
     return this.countdownService.remainingTime;
   }
 
+  // Adjusted remaining time that accounts for December 13th
+  adjustedRemainingTime = computed(() => {
+    const baseTime = this.remainingTime();
+
+    if (!this.workingDecember13th) {
+      return baseTime;
+    }
+
+    // Add 24 hours (one full day) to all time calculations
+    const additionalMilliseconds = 24 * 60 * 60 * 1000; // 24 hours in ms
+    const totalMs = baseTime.totalSeconds * 1000 + additionalMilliseconds;
+
+    const totalSeconds = Math.floor(totalMs / 1000);
+    const totalMinutes = Math.floor(totalSeconds / 60);
+    const totalHours = Math.floor(totalMinutes / 60);
+    const totalDays = Math.floor(totalHours / 24);
+    const weeks = Math.floor(totalDays / 7);
+
+    const days = totalDays % 7;
+    const hours = totalHours % 24;
+    const minutes = totalMinutes % 60;
+    const seconds = totalSeconds % 60;
+
+    return {
+      weeks,
+      days,
+      hours,
+      minutes,
+      seconds,
+      totalDays,
+      totalHours,
+      totalMinutes,
+      totalSeconds,
+      isComplete: baseTime.isComplete,
+      progressPercentage: baseTime.progressPercentage,
+    };
+  });
+
   get progress() {
     return this.countdownService.progress;
   }
@@ -79,6 +118,11 @@ export class CountdownComponent implements OnInit {
         workdays++;
       }
       currentDate.setDate(currentDate.getDate() + 1);
+    }
+
+    // Add December 13th (Saturday) if working that day
+    if (this.workingDecember13th) {
+      workdays += 1;
     }
 
     return workdays;
