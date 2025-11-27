@@ -69,11 +69,11 @@
           width: 0;
           height: 0;
 
-          &:checked + .slider {
+          &:checked+.slider {
             background-color: #c41e3a;
           }
 
-          &:checked + .slider:before {
+          &:checked+.slider:before {
             transform: translateX(26px);
           }
         }
@@ -217,12 +217,10 @@
       left: 0;
       right: 0;
       bottom: 0;
-      background: linear-gradient(
-        90deg,
-        transparent 0%,
-        rgba(255, 255, 255, 0.3) 50%,
-        transparent 100%
-      );
+      background: linear-gradient(90deg,
+          transparent 0%,
+          rgba(255, 255, 255, 0.3) 50%,
+          transparent 100%);
       animation: shimmer 2s infinite;
     }
   }
@@ -238,6 +236,7 @@
   0% {
     transform: translateX(-100%);
   }
+
   100% {
     transform: translateX(100%);
   }
@@ -297,6 +296,20 @@
 // Celebration Styles
 .celebration {
   padding: 4rem 2rem;
+  text-align: center;
+  animation: bounceIn 1s ease-out;
+  position: relative;
+  overflow: hidden;
+
+  .santa-sleigh {
+    font-size: 4rem;
+    position: absolute;
+    top: 20px;
+    left: -150px;
+    animation: flyAcross 8s linear infinite;
+    z-index: 10;
+    pointer-events: none;
+  }
 
   .celebration-title {
     font-size: 4rem;
@@ -304,6 +317,7 @@
     color: #c41e3a;
     margin-bottom: 1rem;
     animation: bounce 1s infinite;
+    text-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
 
     @media (max-width: 768px) {
       font-size: 2.5rem;
@@ -331,22 +345,50 @@
   }
 }
 
+@keyframes flyAcross {
+  0% {
+    left: -150px;
+    transform: translateY(0) rotate(-5deg);
+  }
+
+  25% {
+    transform: translateY(20px) rotate(0deg);
+  }
+
+  50% {
+    transform: translateY(0) rotate(5deg);
+  }
+
+  75% {
+    transform: translateY(-20px) rotate(0deg);
+  }
+
+  100% {
+    left: 110%;
+    transform: translateY(0) rotate(-5deg);
+  }
+}
+
 @keyframes bounce {
+
   0%,
   100% {
     transform: translateY(0);
   }
+
   50% {
     transform: translateY(-20px);
   }
 }
 
 @keyframes pulse {
+
   0%,
   100% {
     transform: scale(1);
     box-shadow: 0 4px 12px rgba(22, 91, 51, 0.3);
   }
+
   50% {
     transform: scale(1.05);
     box-shadow: 0 6px 16px rgba(255, 215, 0, 0.5);

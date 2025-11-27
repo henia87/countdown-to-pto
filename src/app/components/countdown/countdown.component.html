@@ -8,15 +8,9 @@
     <!-- December 13th Toggle -->
     <div class="december-13th-toggle">
       <label class="toggle-label">
-        <span class="toggle-text"
-          >⚠️ Working December 13th (Saturday)? You poor soul... 😭</span
-        >
+        <span class="toggle-text">⚠️ Working December 13th (Saturday)? You poor soul... 😭</span>
         <div class="toggle-switch">
-          <input
-            type="checkbox"
-            [(ngModel)]="workingDecember13th"
-            id="dec13-toggle"
-          />
+          <input type="checkbox" [(ngModel)]="workingDecember13th" id="dec13-toggle" />
           <span class="slider"></span>
         </div>
       </label>
@@ -25,15 +19,9 @@
     <!-- Traitor Tracking Toggle -->
     <div class="december-13th-toggle">
       <label class="toggle-label">
-        <span class="toggle-text"
-          >🎮 There's a traitor among us (leaves Dec 12)... Dare to see?</span
-        >
+        <span class="toggle-text">🎮 There's a traitor among us (leaves Dec 12)... Dare to see?</span>
         <div class="toggle-switch">
-          <input
-            type="checkbox"
-            [(ngModel)]="trackingTraitor"
-            id="traitor-toggle"
-          />
+          <input type="checkbox" [(ngModel)]="trackingTraitor" id="traitor-toggle" />
           <span class="slider"></span>
         </div>
       </label>
@@ -112,9 +100,9 @@
     <p class="stat-item">
       📧 Emails you've answered while they relax:
       {{
-        emailsWhileTraitorRelaxes() > 0
-          ? emailsWhileTraitorRelaxes().toLocaleString()
-          : "Too many"
+      emailsWhileTraitorRelaxes() > 0
+      ? emailsWhileTraitorRelaxes().toLocaleString()
+      : "Too many"
       }}
     </p>
     <p class="stat-item">☕ Your jealousy level: MAXIMUM</p>
@@ -139,9 +127,11 @@
   } @else {
   <!-- Celebration Message -->
   <div class="celebration">
+    <div class="santa-sleigh">🛷🎅🦌🦌🦌</div>
     <h1 class="celebration-title">🎉 YOU'RE FREE! 🎉</h1>
     <p class="celebration-message">Christmas leave has STARTED! 🎄✨</p>
     <p class="celebration-subtitle">Merry Christmasing! Time to relax! 🎅</p>
+    <audio id="celebration-sound" src="sounds/jingle-bells.mp3" preload="auto"></audio>
   </div>
   }
 </div>

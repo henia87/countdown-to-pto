@@ -342,7 +342,14 @@ export class CountdownComponent implements OnInit {
 
   // Launch epic confetti celebration
   private launchConfetti(): void {
-    const duration = 5000; // 5 seconds of confetti
+    // Play celebration sound
+    const audio = document.getElementById('celebration-sound') as HTMLAudioElement;
+    if (audio) {
+      audio.volume = 0.5;
+      audio.play().catch(e => console.log('Audio play failed (user interaction needed first?):', e));
+    }
+
+    const duration = 15 * 1000; // 15 seconds of confetti!
     const animationEnd = Date.now() + duration;
     const defaults = { startVelocity: 30, spread: 360, ticks: 60, zIndex: 0 };
 
@@ -374,12 +381,19 @@ export class CountdownComponent implements OnInit {
       });
     }, 250);
 
-    // Bonus: One big burst at the start
-    confetti({
-      particleCount: 100,
-      spread: 160,
-      origin: { y: 0.6 },
-      colors: ['#C41E3A', '#165B33', '#FFD700', '#FFFFFF'],
-    });
+    // Bonus: Big bursts!
+    const burst = () => {
+      confetti({
+        particleCount: 100,
+        spread: 100,
+        origin: { y: 0.6 },
+        colors: ['#C41E3A', '#165B33', '#FFD700', '#FFFFFF'],
+      });
+    };
+
+    burst();
+    setTimeout(burst, 1000);
+    setTimeout(burst, 2500);
+    setTimeout(burst, 5000);
   }
 }
