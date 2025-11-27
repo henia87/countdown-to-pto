@@ -13,10 +13,10 @@ export class CountdownComponent implements OnInit {
   private confettiLaunched = false;
   currentFunnyQuote: string = '';
   workingDecember13th: boolean = false; // Toggle for extra workday
-  trackingTraitor: boolean = false; // Toggle for Dec 12th early leaver
+  trackingTraitor: boolean = false; // Toggle for Dec 13th early leaver
 
   // Traitor's escape date
-  private readonly TRAITOR_ESCAPE = new Date('2025-12-12T18:00:00+01:00');
+  private readonly TRAITOR_ESCAPE = new Date('2025-12-13T18:00:00+01:00');
 
   // Array of rotating funny work-themed quotes
   private funnyQuotes = [
@@ -174,7 +174,7 @@ export class CountdownComponent implements OnInit {
     return now >= this.TRAITOR_ESCAPE;
   });
 
-  // Workdays until traitor escapes (before Dec 12)
+  // Workdays until traitor escapes (before Dec 13)
   workdaysUntilTraitorEscape = computed(() => {
     const _ = this.remainingTime(); // Make reactive
     const now = new Date();
@@ -192,7 +192,11 @@ export class CountdownComponent implements OnInit {
 
     while (currentDate <= targetDate) {
       const dayOfWeek = currentDate.getDay();
-      if (dayOfWeek >= 1 && dayOfWeek <= 5) {
+      // Count weekdays OR December 13th (Saturday)
+      if (
+        (dayOfWeek >= 1 && dayOfWeek <= 5) ||
+        (currentDate.getMonth() === 11 && currentDate.getDate() === 13)
+      ) {
         workdays++;
       }
       currentDate.setDate(currentDate.getDate() + 1);
@@ -201,7 +205,7 @@ export class CountdownComponent implements OnInit {
     return workdays;
   });
 
-  // Days traitor has been free (after Dec 12)
+  // Days traitor has been free (after Dec 13)
   daysTraitorHasBeenFree = computed(() => {
     const _ = this.remainingTime(); // Make reactive
     const now = new Date();
@@ -343,10 +347,16 @@ export class CountdownComponent implements OnInit {
   // Launch epic confetti celebration
   private launchConfetti(): void {
     // Play celebration sound
-    const audio = document.getElementById('celebration-sound') as HTMLAudioElement;
+    const audio = document.getElementById(
+      'celebration-sound'
+    ) as HTMLAudioElement;
     if (audio) {
       audio.volume = 0.5;
-      audio.play().catch(e => console.log('Audio play failed (user interaction needed first?):', e));
+      audio
+        .play()
+        .catch((e) =>
+          console.log('Audio play failed (user interaction needed first?):', e)
+        );
     }
 
     const duration = 15 * 1000; // 15 seconds of confetti!
