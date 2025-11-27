@@ -21,7 +21,7 @@ body {
 }
 
 body {
-  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  font-family: "Inter", "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
   background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
   color: #333;
   min-height: 100vh;
@@ -71,6 +71,7 @@ h3,
 h4,
 h5,
 h6 {
+  font-family: "Mountains of Christmas", cursive;
   font-weight: 700;
   line-height: 1.2;
 }
