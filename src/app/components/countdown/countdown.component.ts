@@ -12,8 +12,10 @@ import { effect } from '@angular/core';
 export class CountdownComponent implements OnInit {
   private confettiLaunched = false;
   currentFunnyQuote: string = '';
+  currentExcuse: string = ''; // For the excuse generator
   workingDecember13th: boolean = false; // Toggle for extra workday
-  trackingTraitor: boolean = false; // Toggle for Dec 13th early leaver
+  trackingTraitor: boolean = false; // Toggle for Dec 12th early leaver
+  grinchMode: boolean = false; // Toggle for Grinch Mode
 
   // Traitor's escape date
   private readonly TRAITOR_ESCAPE = new Date('2025-12-13T18:00:00+01:00');
@@ -35,6 +37,36 @@ export class CountdownComponent implements OnInit {
     'Meetings? Not your problem soon! 🚫',
     'The standup can happen without you! 🎤',
     'Your laptop will miss you... probably 💻',
+  ];
+
+  // Grinch quotes for the cynical developer
+  private grinchQuotes = [
+    'Christmas is just a marketing stunt. 😒',
+    'I hate noise. I hate joy. I hate this countdown. 💚',
+    'Your code is bad and you should feel bad. 🐛',
+    'Santa is just a GDPR violation waiting to happen. 🎅🚫',
+    'Jingle bells? More like Jingle HELLS. 🔥',
+    'I hope you get coal. Or a merge conflict. 🪨',
+    'Bah humbug. 🎩',
+    'The only thing dropping this Christmas is production. 📉',
+    'Happiness is a deprecated feature. 🗑️',
+    'I stole the Christmas tree. Deal with it. 🎄🏃',
+  ];
+
+  // Developer excuses
+  private developerExcuses = [
+    "I'm waiting for the pods to scale up.",
+    "The linter is running a deep scan.",
+    "My local environment is hydrating.",
+    "I'm compiling the assets... manually.",
+    "Docker is restarting. Again.",
+    "I'm waiting for a PR review from 2024.",
+    "The wifi is allergic to my laptop.",
+    "I'm optimizing the SVG paths by hand.",
+    "My keyboard is updating its firmware.",
+    "I'm de-fragmenting the cloud.",
+    "Waiting for the node_modules black hole to close.",
+    "I'm stuck in a vim exit loop.",
   ];
 
   constructor(private countdownService: CountdownService) {
@@ -289,7 +321,7 @@ export class CountdownComponent implements OnInit {
   private createSnowflake(): void {
     const snowflake = document.createElement('div');
     snowflake.classList.add('snowflake');
-    snowflake.textContent = '❄';
+    snowflake.textContent = this.grinchMode ? '🐛' : '❄';
 
     // Random properties for natural variation
     const leftPosition = Math.random() * 100; // Random horizontal position
@@ -314,8 +346,27 @@ export class CountdownComponent implements OnInit {
 
   // Select a random funny quote
   private setRandomQuote(): void {
-    const randomIndex = Math.floor(Math.random() * this.funnyQuotes.length);
-    this.currentFunnyQuote = this.funnyQuotes[randomIndex];
+    const quotes = this.grinchMode ? this.grinchQuotes : this.funnyQuotes;
+    const randomIndex = Math.floor(Math.random() * quotes.length);
+    this.currentFunnyQuote = quotes[randomIndex];
+  }
+
+  // Generate a random developer excuse
+  generateExcuse(): void {
+    const randomIndex = Math.floor(Math.random() * this.developerExcuses.length);
+    this.currentExcuse = this.developerExcuses[randomIndex];
+  }
+
+  // Toggle Grinch Mode
+  toggleGrinchMode(): void {
+    // Force immediate quote update
+    this.setRandomQuote();
+    
+    // Update snowflakes immediately (optional, but nice touch)
+    const snowflakes = document.querySelectorAll('.snowflake');
+    snowflakes.forEach(flake => {
+      flake.textContent = this.grinchMode ? '🐛' : '❄';
+    });
   }
 
   // Helper method to format numbers with leading zeros

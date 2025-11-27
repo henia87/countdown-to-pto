@@ -35,10 +35,20 @@
     }
   }
 
-  // December 13th Toggle Switch
-  .december-13th-toggle {
+  // Toggles Container
+  .toggles-container {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    flex-wrap: wrap;
     margin: 1.5rem auto;
-    max-width: 500px;
+    max-width: 800px;
+
+    .toggle-wrapper {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
 
     .toggle-label {
       display: flex;
@@ -392,5 +402,110 @@
   50% {
     transform: scale(1.05);
     box-shadow: 0 6px 16px rgba(255, 215, 0, 0.5);
+  }
+}
+
+// Developer Excuse Generator
+.excuse-generator {
+  margin-top: 3rem;
+  padding: 2rem;
+  background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+  border-radius: 16px;
+  color: white;
+  box-shadow: 0 8px 24px rgba(44, 62, 80, 0.3);
+
+  .excuse-title {
+    font-size: 1.5rem;
+    margin-bottom: 1.5rem;
+    color: #3498db;
+  }
+
+  .excuse-btn {
+    background-color: #e74c3c;
+    color: white;
+    border: none;
+    padding: 1rem 2rem;
+    font-size: 1.1rem;
+    font-weight: bold;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: transform 0.2s, background-color 0.2s;
+    box-shadow: 0 4px 12px rgba(231, 76, 60, 0.4);
+
+    &:hover {
+      transform: scale(1.05);
+      background-color: #c0392b;
+    }
+
+    &:active {
+      transform: scale(0.95);
+    }
+  }
+
+  .excuse-display {
+    margin-top: 1.5rem;
+    padding: 1.5rem;
+    background-color: rgba(0, 0, 0, 0.2);
+    border-radius: 8px;
+    border-left: 4px solid #3498db;
+
+    p {
+      font-size: 1.2rem;
+      font-family: 'Courier New', monospace;
+      margin: 0;
+      line-height: 1.4;
+    }
+  }
+}
+
+// Grinch Theme Overrides
+.countdown-container.grinch-theme {
+  .title {
+    color: #6ab04c; // Grinch Green
+    text-shadow: 2px 2px 0px #2d3436;
+  }
+
+  .subtitle {
+    color: #2d3436;
+  }
+
+  .toggle-text {
+    color: #6ab04c;
+  }
+
+  .toggle-switch input:checked+.slider {
+    background-color: #6ab04c;
+  }
+
+  .milestone-message {
+    background: linear-gradient(135deg, #2d3436 0%, #636e72 100%);
+    color: #badc58;
+    box-shadow: 0 4px 12px rgba(45, 52, 54, 0.3);
+  }
+
+  .funny-quote {
+    color: #2d3436;
+    font-family: 'Courier New', monospace;
+  }
+
+  .time-unit {
+    background: linear-gradient(135deg, #6ab04c 0%, #badc58 100%);
+    box-shadow: 0 8px 16px rgba(106, 176, 76, 0.3);
+
+    .time-value {
+      color: #2d3436;
+    }
+
+    .time-label {
+      color: #2d3436;
+    }
+  }
+
+  .progress-fill {
+    background: linear-gradient(90deg, #2d3436 0%, #636e72 100%);
+  }
+
+  .progress-text {
+    color: #2d3436;
   }
 }

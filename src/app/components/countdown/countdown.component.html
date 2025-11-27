@@ -1,42 +1,67 @@
-<div class="countdown-container">
+<div class="countdown-container" [class.grinch-theme]="grinchMode">
   @if (!countdownComplete()) {
   <!-- Main Countdown Display -->
   <div class="countdown-header">
-    <h1 class="title">🎄 Christmas Leave Countdown 🎄</h1>
-    <p class="subtitle">Freedom approaches... December 19, 2025 at 6:00 PM</p>
+    <h1 class="title">
+      {{ grinchMode ? "😒 Grinch Countdown 😒" : "🎄 Christmas Leave Countdown 🎄" }}
+    </h1>
+    <p class="subtitle">
+      {{ grinchMode ? "Doom approaches..." : "Freedom approaches..." }} December 19, 2025 at 6:00 PM
+    </p>
 
-    <!-- December 13th Toggle -->
-    <div class="december-13th-toggle">
-      <label class="toggle-label">
-        <span class="toggle-text"
-          >⚠️ Working December 13th (Saturday)? You poor soul... 😭</span
-        >
-        <div class="toggle-switch">
-          <input
-            type="checkbox"
-            [(ngModel)]="workingDecember13th"
-            id="dec13-toggle"
-          />
-          <span class="slider"></span>
-        </div>
-      </label>
-    </div>
+    <!-- Toggles Container -->
+    <div class="toggles-container">
+      <!-- December 13th Toggle -->
+      <div class="toggle-wrapper">
+        <label class="toggle-label">
+          <span class="toggle-text"
+            >⚠️ Working Dec 13th?</span
+          >
+          <div class="toggle-switch">
+            <input
+              type="checkbox"
+              [(ngModel)]="workingDecember13th"
+              id="dec13-toggle"
+            />
+            <span class="slider"></span>
+          </div>
+        </label>
+      </div>
 
-    <!-- Traitor Tracking Toggle -->
-    <div class="december-13th-toggle">
-      <label class="toggle-label">
-        <span class="toggle-text"
-          >🎮 There's a traitor among us (leaves Dec 13)... Dare to see?</span
-        >
-        <div class="toggle-switch">
-          <input
-            type="checkbox"
-            [(ngModel)]="trackingTraitor"
-            id="traitor-toggle"
-          />
-          <span class="slider"></span>
-        </div>
-      </label>
+      <!-- Traitor Tracking Toggle -->
+      <div class="toggle-wrapper">
+        <label class="toggle-label">
+          <span class="toggle-text"
+            >🎮 Track Traitor?</span
+          >
+          <div class="toggle-switch">
+            <input
+              type="checkbox"
+              [(ngModel)]="trackingTraitor"
+              id="traitor-toggle"
+            />
+            <span class="slider"></span>
+          </div>
+        </label>
+      </div>
+
+      <!-- Grinch Mode Toggle -->
+      <div class="toggle-wrapper">
+        <label class="toggle-label">
+          <span class="toggle-text"
+            >💚 Grinch Mode</span
+          >
+          <div class="toggle-switch">
+            <input
+              type="checkbox"
+              [(ngModel)]="grinchMode"
+              (change)="toggleGrinchMode()"
+              id="grinch-toggle"
+            />
+            <span class="slider"></span>
+          </div>
+        </label>
+      </div>
     </div>
 
     <p class="milestone-message">{{ getMilestoneMessage() }}</p>
@@ -135,6 +160,19 @@
     <p class="stat-item">
       ⏱️ Work Hours Left: {{ workHoursRemaining().toLocaleString() }}
     </p>
+  </div>
+
+  <!-- Developer Excuse Generator -->
+  <div class="excuse-generator">
+    <h3 class="excuse-title">🤖 Developer Excuse Generator</h3>
+    <button class="excuse-btn" (click)="generateExcuse()">
+      Generate Excuse
+    </button>
+    @if (currentExcuse) {
+    <div class="excuse-display">
+      <p>"{{ currentExcuse }}"</p>
+    </div>
+    }
   </div>
   } @else {
   <!-- Celebration Message -->
