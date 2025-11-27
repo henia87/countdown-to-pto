@@ -3,10 +3,15 @@
   <!-- Main Countdown Display -->
   <div class="countdown-header">
     <h1 class="title">
-      {{ grinchMode ? "😒 Grinch Countdown 😒" : "🎄 Christmas Leave Countdown 🎄" }}
+      {{
+        grinchMode
+          ? "😒 Grinch Countdown 😒"
+          : "🎄 Christmas Leave Countdown 🎄"
+      }}
     </h1>
     <p class="subtitle">
-      {{ grinchMode ? "Doom approaches..." : "Freedom approaches..." }} December 19, 2025 at 6:00 PM
+      {{ grinchMode ? "Doom approaches..." : "Freedom approaches..." }} December
+      19, 2025 at 6:00 PM
     </p>
 
     <!-- Toggles Container -->
@@ -14,9 +19,7 @@
       <!-- December 13th Toggle -->
       <div class="toggle-wrapper">
         <label class="toggle-label">
-          <span class="toggle-text"
-            >⚠️ Working Dec 13th?</span
-          >
+          <span class="toggle-text">⚠️ Working Dec 13th?</span>
           <div class="toggle-switch">
             <input
               type="checkbox"
@@ -31,9 +34,7 @@
       <!-- Traitor Tracking Toggle -->
       <div class="toggle-wrapper">
         <label class="toggle-label">
-          <span class="toggle-text"
-            >🎮 Track Traitor?</span
-          >
+          <span class="toggle-text">🎮 Track Traitor?</span>
           <div class="toggle-switch">
             <input
               type="checkbox"
@@ -48,9 +49,7 @@
       <!-- Grinch Mode Toggle -->
       <div class="toggle-wrapper">
         <label class="toggle-label">
-          <span class="toggle-text"
-            >💚 Grinch Mode</span
-          >
+          <span class="toggle-text">💚 Grinch Mode</span>
           <div class="toggle-switch">
             <input
               type="checkbox"
