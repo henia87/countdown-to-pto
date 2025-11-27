@@ -145,6 +145,7 @@ Create a festive, fun visual experience.
 - [x] Add hover effects and micro-interactions
 - [x] Add shimmer animation to progress bar
 - [x] Add bounce animation for celebration
+- [x] Add "Office Days Remaining" statistic (Tue, Wed, Thu) ✅
 - [ ] Set up Bootstrap 5 (or consider Tailwind CSS) - OPTIONAL
 - [ ] Add festive fonts (Google Fonts) - OPTIONAL
 - [ ] Implement dark/light mode toggle (optional) - OPTIONAL
@@ -739,6 +740,7 @@ This is a fun personal project. Feel free to clone and customize for your own co
   - 📊 Total Days Until Freedom: 39
   - ⏰ Total Hours: ~950
   - 💼 **Workdays Left: 30** (Mon-Fri only)
+  - 🏢 **Office Days Left: 9** (Tue, Wed, Thu only - updates at 6PM!)
   - ⏱️ **Work Hours Left: 240** (30 days × 8 hours)
 - ✅ **Epic confetti celebration** ready for Dec 19 at 6PM (5 seconds, Christmas colors, multiple angles!)
 - ✅ **LIVE AND DEPLOYED:** https://countdown-to-pto.netlify.app/
@@ -753,7 +755,8 @@ This is a fun personal project. Feel free to clone and customize for your own co
 6. ✅ Confetti celebration with canvas-confetti
 7. ✅ Rotating funny quotes (15 different messages)
 8. ✅ Work statistics (workdays and work hours calculations)
-9. ✅ Cleaned up unnecessary GitHub Actions workflow
+9. ✅ Office days countdown (Tue, Wed, Thu tracking)
+10. ✅ Cleaned up unnecessary GitHub Actions workflow
 
 ### 📊 Final Progress
 

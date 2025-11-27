@@ -214,6 +214,40 @@ export class CountdownComponent implements OnInit {
     return this.daysTraitorHasBeenFree() * 20;
   });
 
+  // Office days remaining (Tue, Wed, Thu) - decreases at 6 PM on office days
+  officeDaysRemaining = computed(() => {
+    // Access remainingTime to make this reactive
+    const _ = this.remainingTime();
+
+    const now = new Date();
+    const targetDate = new Date('2025-12-19T18:00:00+01:00');
+    const currentHour = now.getHours();
+
+    let officeDays = 0;
+    const currentDate = new Date(now);
+    currentDate.setHours(0, 0, 0, 0);
+
+    // If it's past 6 PM on an office day, don't count today
+    // Office days are Tue (2), Wed (3), Thu (4)
+    const currentDay = now.getDay();
+    const isOfficeDay = currentDay >= 2 && currentDay <= 4;
+
+    if (currentHour >= 18 && isOfficeDay) {
+      currentDate.setDate(currentDate.getDate() + 1);
+    }
+
+    while (currentDate <= targetDate) {
+      const dayOfWeek = currentDate.getDay();
+      // Count if it's Tuesday (2), Wednesday (3), or Thursday (4)
+      if (dayOfWeek >= 2 && dayOfWeek <= 4) {
+        officeDays++;
+      }
+      currentDate.setDate(currentDate.getDate() + 1);
+    }
+
+    return officeDays;
+  });
+
   ngOnInit(): void {
     // Increment the check counter for fun statistics
     this.countdownService.incrementCheckCount();
